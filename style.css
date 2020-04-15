@@ -1,0 +1,35 @@
+body {
+  background: #151515;
+}
+
+table {
+  width: 600px;
+  border-spacing: 0;
+}
+td,
+th {
+  border: 1px solid #aaa;
+  color: #eee;
+}
+
+th {
+  font-weight: bold;
+}
+
+td {
+  text-align: center;
+}
+
+.del {
+  background-color: #151515;
+  border: 0;
+  color: red;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 3px;
+}
+
+#btn {
+  margin: 10 auto;
+  font-size: 15px;
+}
