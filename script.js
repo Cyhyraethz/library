@@ -29,7 +29,9 @@ function render() {
     let pages = document.createElement('td');
     pages.innerHTML = e.pages;
     let status = document.createElement('td');
-    status.innerHTML = `<button class='status'>${e.status}</button>`;
+    status.innerHTML = `<button class='status' id=${library.indexOf(e) + 's'}>${
+      e.status
+    }</button>`;
     let del = document.createElement('button');
     del.innerHTML = 'X';
     del.setAttribute('class', 'del');
@@ -44,6 +46,14 @@ function render() {
     document.getElementById(library.indexOf(e)).appendChild(pages);
     document.getElementById(library.indexOf(e)).appendChild(status);
     document.getElementById(library.indexOf(e)).appendChild(del);
+    let btn = document.getElementById(`${library.indexOf(e) + 's'}`);
+    btn.addEventListener('click', function () {
+      if (btn.innerHTML === 'read') {
+        btn.innerHTML = 'not read yet';
+      } else if (btn.innerHTML === 'not read yet') {
+        btn.innerHTML = 'read';
+      }
+    });
   });
 }
 
