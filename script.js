@@ -29,7 +29,7 @@ function render() {
     let pages = document.createElement('td');
     pages.innerHTML = e.pages;
     let status = document.createElement('td');
-    status.innerHTML = e.status;
+    status.innerHTML = `<button class='status'>${e.status}</button>`;
     let del = document.createElement('button');
     del.innerHTML = 'X';
     del.setAttribute('class', 'del');
@@ -50,8 +50,20 @@ function render() {
 btn.addEventListener('click', function () {
   let title = prompt('Title: ');
   let author = prompt('Author: ');
-  let pages = prompt('Pages: ');
-  let status = prompt('Status: ');
+  let pages = prompt('Pages: (please enter a number)');
+  while (isNaN(parseInt(pages))) {
+    pages = prompt('Pages: (please enter a number)');
+  }
+  let read = prompt('Finished reading: (please enter true or false)');
+  let status;
+  while (read !== 'true' && read !== 'false') {
+    read = prompt('Finished reading: (please enter true or false)');
+  }
+  if (read === 'true') {
+    status = 'read';
+  } else if (read === 'false') {
+    status = 'not read yet';
+  }
   addBookToLibrary(new Book(title, author, pages, status));
   render();
 });

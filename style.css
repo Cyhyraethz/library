@@ -20,6 +20,16 @@ td {
   text-align: center;
 }
 
+.status {
+  background-color: #151515;
+  border: 0;
+  color: #eee;
+}
+
+.status:focus {
+  outline: none;
+}
+
 .del {
   background-color: #151515;
   border: 0;
