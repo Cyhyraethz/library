@@ -2,13 +2,13 @@ const library = [];
 const btn = document.getElementById('btn');
 const bookTable = document.getElementById('bookTable');
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, status) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.read = read;
+  this.status = status;
   this.info = function () {
-    return `${title} by ${author}, ${pages} pages, ${read}`;
+    return `${title} by ${author}, ${pages} pages, ${status}`;
   };
 }
 
@@ -18,7 +18,7 @@ function addBookToLibrary(book) {
 
 function render() {
   bookTable.innerHTML =
-    '<tr><th>Title</th><th>Author</th><th>Pages</th><th>Read</th></tr>';
+    '<tr><th>Title</th><th>Author</th><th>Pages</th><th>Status</th></tr>';
   library.forEach((e) => {
     let row = document.createElement('tr');
     row.setAttribute('id', library.indexOf(e));
@@ -28,8 +28,8 @@ function render() {
     author.innerHTML = e.author;
     let pages = document.createElement('td');
     pages.innerHTML = e.pages;
-    let read = document.createElement('td');
-    read.innerHTML = e.read;
+    let status = document.createElement('td');
+    status.innerHTML = e.status;
     let del = document.createElement('button');
     del.innerHTML = 'X';
     del.setAttribute('class', 'del');
@@ -42,7 +42,7 @@ function render() {
     document.getElementById(library.indexOf(e)).appendChild(title);
     document.getElementById(library.indexOf(e)).appendChild(author);
     document.getElementById(library.indexOf(e)).appendChild(pages);
-    document.getElementById(library.indexOf(e)).appendChild(read);
+    document.getElementById(library.indexOf(e)).appendChild(status);
     document.getElementById(library.indexOf(e)).appendChild(del);
   });
 }
@@ -51,8 +51,8 @@ btn.addEventListener('click', function () {
   let title = prompt('Title: ');
   let author = prompt('Author: ');
   let pages = prompt('Pages: ');
-  let read = prompt('Read: ');
-  addBookToLibrary(new Book(title, author, pages, read));
+  let status = prompt('Status: ');
+  addBookToLibrary(new Book(title, author, pages, status));
   render();
 });
 
