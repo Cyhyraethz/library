@@ -1,6 +1,21 @@
-const library = [];
+let library = [];
 const btn = document.getElementById('btn');
 const bookTable = document.getElementById('bookTable');
+
+function populateStorage() {
+  library.forEach((book) => {
+    localStorage.setItem(book.title, book);
+  });
+}
+
+function populateLibrary() {
+  for (let i = 0; i < localStorage.length; i++) {
+    let book = localStorage.getItem(localStorage.key(i));
+    if (book.title !== undefined) {
+      library.push(book);
+    }
+  }
+}
 
 function Book(title, author, pages, status) {
   this.title = title;
@@ -100,4 +115,13 @@ let prisonerAzkaban = new Book(
 addBookToLibrary(sorcererStone);
 addBookToLibrary(chamberSecrets);
 addBookToLibrary(prisonerAzkaban);
+
+if (!localStorage.getItem('lib')) {
+  populateStorage();
+  // console.log('not yet...');
+} else {
+  populateLibrary();
+  // console.log('yes!');
+}
+
 render();
