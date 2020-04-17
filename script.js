@@ -52,6 +52,7 @@ function render() {
     del.setAttribute('class', 'del');
     del.setAttribute('id', library.indexOf(e) + 'x');
     del.addEventListener('click', function () {
+      localStorage.removeItem(title);
       let node = document.getElementById(library.indexOf(e) + 'x');
       node.parentNode.parentNode.removeChild(node.parentNode);
     });
