@@ -3,14 +3,15 @@ const btn = document.getElementById('btn');
 const bookTable = document.getElementById('bookTable');
 
 function populateStorage() {
+  localStorage.clear();
   library.forEach((book) => {
-    localStorage.setItem(book.title, book);
+    localStorage.setItem(book.title, JSON.stringify(book));
   });
 }
 
 function populateLibrary() {
   for (let i = 0; i < localStorage.length; i++) {
-    let book = localStorage.getItem(localStorage.key(i));
+    let book = JSON.parse(localStorage.getItem(localStorage.key(i)));
     if (book.title !== undefined) {
       library.push(book);
     }
@@ -27,8 +28,8 @@ function Book(title, author, pages, status) {
   };
 }
 
-function addBookToLibrary(book) {
-  library.push(book);
+function addBookToLibrary(...books) {
+  library.push(...books);
 }
 
 function render() {
@@ -52,7 +53,7 @@ function render() {
     del.setAttribute('class', 'del');
     del.setAttribute('id', library.indexOf(e) + 'x');
     del.addEventListener('click', function () {
-      localStorage.removeItem(title);
+      localStorage.removeItem(title.innerHTML);
       let node = document.getElementById(library.indexOf(e) + 'x');
       node.parentNode.parentNode.removeChild(node.parentNode);
     });
@@ -91,6 +92,7 @@ btn.addEventListener('click', function () {
     status = 'not read yet';
   }
   addBookToLibrary(new Book(title, author, pages, status));
+  populateStorage();
   render();
 });
 
@@ -113,16 +115,14 @@ let prisonerAzkaban = new Book(
   'not read yet'
 );
 
-addBookToLibrary(sorcererStone);
-addBookToLibrary(chamberSecrets);
-addBookToLibrary(prisonerAzkaban);
+if (localStorage.length < 1) {
+  addBookToLibrary(sorcererStone, chamberSecrets, prisonerAzkaban);
+}
 
-if (!localStorage.getItem('lib')) {
+if (localStorage.length < 1) {
   populateStorage();
-  // console.log('not yet...');
 } else {
   populateLibrary();
-  // console.log('yes!');
 }
 
 render();
